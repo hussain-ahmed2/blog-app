@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+@theme {
+    --font-sans: 'Karla', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer base {
+    .nav {
+        @apply flex justify-between items-center min-h-14 px-5 max-w-5xl mx-auto;
+    }
+
+    .link {
+        @apply hover:underline font-medium transition duration-300;
+    }
+
+    .link-group {
+        @apply flex items-center justify-center gap-5;
+    }
+
+    .logo {
+        @apply text-2xl font-bold text-teal-500;
+    }
+
+    .btn {
+        @apply px-5 py-1 rounded font-medium border border-transparent transition duration-300 active:ring-2 ring-slate-500/50;
+    }
+
+    .title {
+        @apply font-bold text-slate-900 text-lg hover:underline;
+    }
+
+    /* .pagination {
+        @apply flex gap-5 mx-auto w-fit;
+    } */
+}
