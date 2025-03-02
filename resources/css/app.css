@@ -26,18 +26,14 @@
     }
 
     .logo {
-        @apply text-2xl font-bold text-teal-500;
+        @apply text-2xl font-bold text-cyan-500;
     }
 
     .btn {
-        @apply px-5 py-1 rounded font-medium border border-transparent transition duration-300 active:ring-2 ring-slate-500/50;
+        @apply px-5 py-1 rounded font-medium border border-transparent transition duration-300 active:ring-[0.1875rem] ring-slate-500/50;
     }
 
     .title {
         @apply font-bold text-slate-900 text-lg hover:underline;
     }
-
-    /* .pagination {
-        @apply flex gap-5 mx-auto w-fit;
-    } */
 }
