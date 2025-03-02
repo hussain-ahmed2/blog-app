@@ -11,9 +11,9 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function store(Request $request)
     {
-        // Authentication logic
+        dd($request->all());
     }
 
     public function logout()
