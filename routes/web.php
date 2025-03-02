@@ -6,7 +6,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TagController;
 use App\Models\Post;
 
@@ -31,16 +33,16 @@ Route::get('/search', [SearchController::class, 'show'])->name('search');
 
 // Guest Routes
 Route::middleware('guest')->group(function () {
-    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-    Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/register', [RegisteredUserController::class, 'store']);
 
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/login', [SessionController::class, 'index'])->name('login');
+    Route::post('/login', [SessionController::class, 'store']);
 });
 
 // Auth Routes
 Route::middleware('auth')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout');
 
     Route::post('/posts/{slug}/comment', [CommentController::class, 'store'])->name('comment.store');
     Route::post('/posts/{slug}/like', [LikeController::class, 'toggleLike'])->name('like.toggle');
