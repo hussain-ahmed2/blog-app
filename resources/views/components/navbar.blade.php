@@ -11,6 +11,12 @@
     @auth
         <div class="link-group">
             <a class="link" href="/dashboard">Dashboard</a>
+            <form method="POST" action="/logout">
+                @csrf
+                @method("DELETE")
+                
+                <button class="btn cursor-pointer bg-rose-500 text-white hover:bg-rose-600">Log Out</button>
+            </form>
         </div>
     @else
         <div class="link-group">
