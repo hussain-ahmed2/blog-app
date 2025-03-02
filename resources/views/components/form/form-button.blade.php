@@ -1,0 +1,1 @@
+<button {{$attributes(['type' => 'submit', 'class' => 'block px-5 py-1 border rounded transition duration-300'])}}>{{ $slot }}</button>
