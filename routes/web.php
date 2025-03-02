@@ -12,12 +12,15 @@ use App\Models\Post;
 
 // Public Routes
 Route::get('/', function () {
-    $posts = Post::with(['user', 'comments', 'tags', 'likes'])->latest()->take(3)->get();
-    return view('index', compact('posts'));
+    
+    $featuredPost = Post::with(['user', 'comments', 'tags', 'likes'])->latest()->first();
+    $recentPosts = Post::with(['user', 'comments', 'tags', 'likes'])->latest()->where('id', '!=', optional($featuredPost)->id)->take(3)->get();
+    
+    return view('index', compact('featuredPost', 'recentPosts'));
 })->name('home');
 
-Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
-Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
+Route::get('/posts', [BlogController::class, 'index'])->name('posts');
+Route::get('/posts/{slug}', [BlogController::class, 'show'])->name('posts.show');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
@@ -39,8 +42,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::post('/post/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
-    Route::post('/post/{id}/like', [LikeController::class, 'toggleLike'])->name('like.toggle');
+    Route::post('/posts/{slug}/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::post('/posts/{slug}/like', [LikeController::class, 'toggleLike'])->name('like.toggle');
 });
 
 
