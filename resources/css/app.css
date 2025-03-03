@@ -30,10 +30,14 @@
     }
 
     .btn {
-        @apply px-5 py-1 rounded font-medium border border-transparent transition duration-300 active:ring-[0.1875rem] ring-slate-500/50;
+        @apply px-5 py-1 rounded font-medium border border-transparent transition duration-300 active:ring-[0.1875rem] ring-cyan-500/50;
     }
 
     .title {
-        @apply font-bold text-slate-900 text-lg hover:underline;
+        @apply font-bold text-slate-900 text-lg;
+    }
+
+    .input {
+        @apply p-2 border border-slate-300 w-full outline-none focus:ring-[0.1875rem] ring-cyan-500/50 rounded;
     }
 }
