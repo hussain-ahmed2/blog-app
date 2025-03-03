@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Post;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return view('category.index');
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('category.index', compact('categories'));
     }
 
     public function create()
@@ -26,10 +28,11 @@ class CategoryController extends Controller
         //
     }
 
-    public function show($slug)
+    public function show($id)
     {
-        $category = Category::where('slug', $slug)->firstOrFail();
-        $posts = $category->posts;
+        $category = Category::where('id', $id)->firstOrFail();
+        $posts = Post::with(['user', 'comments', 'likes', 'tags'])->where('category_id', $category->id)->paginate(5);
+        
         return view('category.show', compact('category', 'posts'));
     }
 
