@@ -44,8 +44,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout');
 
-    Route::post('/posts/{slug}/comment', [CommentController::class, 'store'])->name('comment.store');
-    Route::post('/posts/{slug}/like', [LikeController::class, 'toggleLike'])->name('like.toggle');
+    Route::post('/posts/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::post('/posts/{id}/like', [LikeController::class, 'toggleLike'])->name('like.toggle');
 });
 
 
