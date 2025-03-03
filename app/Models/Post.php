@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
@@ -37,6 +38,12 @@ class Post extends Model
     public function likes(): HasMany
     {
         return $this->hasMany(Like::class);
+    }
+
+    // Define the relationship with like (A post is liked by current user or not)
+    public function isLikedByUser(): bool
+    {
+        return $this->likes()->where('user_id', Auth::id())->exists();
     }
 
     // Define the relationship with tags (A post belongs to many tags)
