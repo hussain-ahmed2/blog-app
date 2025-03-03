@@ -14,7 +14,7 @@ class BlogController extends Controller
 
     public function show($slug)
     {
-        $post = Post::with(['user', 'likes', 'comments', 'tags'])->where('slug', $slug)->firstOrFail();
+        $post = Post::with(['user', 'likes', 'comments' => fn ($query) => $query->orderBy('created_at', 'desc'), 'tags'])->where('slug', $slug)->firstOrFail();
         return view('blog.show', compact('post'));
     }
 }
