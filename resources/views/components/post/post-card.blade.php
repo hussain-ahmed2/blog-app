@@ -1,13 +1,17 @@
 @props(['post' => []])
 
-<article class="bg-white p-5 rounded-xl shadow-sm">
+
+<article onclick="window.location='/posts/{{ $post->slug }}'" class="bg-white p-5 rounded-xl shadow-sm">
     <div>
-        <h4 class="text-sm font-semibold mb-2">{{ $post->user->name }}</h4>
+        <a onclick="event.stopPropagation()" href="/authors/{{ $post->user->id }}" class="text-sm font-semibold mb-2 text-cyan-500 hover:underline">
+            {{ $post->user->name }}
+        </a>
     </div>
     <div class="flex flex-col gap-1">
-        <a href="/posts/{{ $post->slug }}" class="title">{{ $post->title }}</a>
-        <p class="text-slate-600 mb-3">{{ $post->content }}</p>
+        <h3 class="title">{{ $post->title }}</h3>
+        <p class="text-slate-600 mb-1 text-justify">{{ $post->content }}</p>
     </div>
+    <p class="text-right text-xs mb-1 hover:underline cursor-pointer hover:text-cyan-500">view more</p>
     <div class="flex items-center justify-between flex-wrap gap-2">
         <div class="flex gap-5">
             <p class="text-sm">
