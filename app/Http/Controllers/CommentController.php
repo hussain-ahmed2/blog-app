@@ -3,19 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Http\Requests\StoreCommentRequest;
-use App\Http\Requests\UpdateCommentRequest;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store($id)
     {
+        $content = request()->get('content');
+
+        request()->validate([
+            'content' => ['required', 'min:2']
+        ]);
+
         Comment::create([
             'post_id' => $id,
-            'user_id' => auth()->id,
-            'content' => $request->content,
+            'user_id' => Auth::id(),
+            'content' => $content,
         ]);
+
         return back();
     }
 }
