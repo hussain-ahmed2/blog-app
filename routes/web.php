@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SessionController;
@@ -14,20 +15,18 @@ use App\Models\Post;
 
 // Public Routes
 Route::get('/', function () {
-    
     $featuredPost = Post::with(['user', 'comments', 'tags', 'likes'])->latest()->first();
     $recentPosts = Post::with(['user', 'comments', 'tags', 'likes'])->latest()->where('id', '!=', optional($featuredPost)->id)->take(3)->get();
-    
     return view('index', compact('featuredPost', 'recentPosts'));
 })->name('home');
 
-Route::get('/posts', [BlogController::class, 'index'])->name('posts');
-Route::get('/posts/{slug}', [BlogController::class, 'show'])->name('posts.show');
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
-Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
 
-Route::get('/tag/{slug}', [TagController::class, 'show'])->name('tag.show');
+Route::get('/tag/{id}', [TagController::class, 'show'])->name('tag.show');
 
 Route::get('/search', [SearchController::class, 'show'])->name('search');
 
@@ -43,6 +42,8 @@ Route::middleware('guest')->group(function () {
 // Auth Routes
 Route::middleware('auth')->group(function () {
     Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout');
+
+    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
     Route::post('/posts/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
     Route::post('/posts/{id}/like', [LikeController::class, 'toggleLike'])->name('like.toggle');
