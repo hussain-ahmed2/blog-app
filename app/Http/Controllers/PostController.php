@@ -13,7 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::with(['user', 'comments', 'tags', 'likes'])->latest()->paginate(5);
+        return view('blog.index', compact('posts'));
     }
 
     /**
@@ -35,9 +36,15 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
+        $post = Post::with([
+            'user', 
+            'comments' => fn ($query) => $query->orderBy('created_at', 'desc'), 
+            'tags', 
+            'likes'
+            ])->where('id', $id)->firstOrFail();
+        return view('blog.show', ['post' => $post]);
     }
 
     /**
