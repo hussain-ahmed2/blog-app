@@ -1,7 +1,7 @@
-@props(['post' => []])
+@props(['post'])
 
 
-<article onclick="window.location='/posts/{{ $post->slug }}'" class="bg-white p-5 rounded-xl shadow-sm">
+<article onclick="window.location='/posts/{{ $post->id }}'" class="bg-white p-5 rounded-xl shadow-sm">
     <div>
         <a onclick="event.stopPropagation()" href="/authors/{{ $post->user->id }}" class="text-sm font-semibold mb-2 text-cyan-500 hover:underline">
             {{ $post->user->name }}
