@@ -19,8 +19,9 @@
         <div class="mt-10">
             <x-heading name="Recent Posts" />
             <x-post.post-container :posts="$recentPosts" />
-            
-            <a class="block w-fit mx-auto mt-5 bg-white hover:underline" href="/posts">View More</a>
+
+            <a class="block w-fit mx-auto mt-5 hover:underline" href="/posts">View More</a>
         </div>
     </section>
+    
 </x-layout>
