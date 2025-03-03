@@ -1,11 +1,16 @@
 <x-layout>
-    <x-slot:pageTitle>Blog</x-slot:pageTitle>
-    
-    <x-heading name="Blogs" />
+    <x-slot:pageTitle>All Posts</x-slot:pageTitle>
 
-    <x-post.post-container :$posts />
+    <x-heading name="All Blog Posts" />
 
-    <div class="mt-5">
-        {{ $posts->links('pagination::custom') }}
-    </div>
+    @if ($posts->count())
+        <x-post.post-container :$posts />
+
+        <div class="mt-5">
+            {{ $posts->links('pagination::custom') }}
+        </div>
+    @else
+        <p class="text-slate-600">No Post available.</p>
+    @endif
+
 </x-layout>
