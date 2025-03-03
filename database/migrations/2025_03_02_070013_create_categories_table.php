@@ -13,12 +13,8 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();  // Ensure slug is unique
+            $table->string('name')->unique();
             $table->timestamps();
-
-            // Optional: Add an index for faster querying on slug
-            $table->index('slug');
         });
     }
 

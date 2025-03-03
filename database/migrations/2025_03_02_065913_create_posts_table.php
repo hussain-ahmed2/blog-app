@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade'); // Automatically sets foreign key and cascade on delete
             $table->foreignIdFor(Category::class)->constrained()->onDelete('set null'); // Adjust onDelete action as per requirement
             $table->string('title');
-            $table->string('slug')->unique(); // Ensure slug is unique for SEO purposes
             $table->text('content');
             $table->timestamps();
         });
