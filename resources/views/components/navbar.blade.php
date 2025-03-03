@@ -3,7 +3,7 @@
 
     <div class="link-group">
         <a class="link" href="/">Home</a>
-        <a class="link" href="/posts">Blogs</a>
+        <a class="link" href="/posts">Posts</a>
         <a class="link" href="/categories">Categories</a>
         <a class="link" href="/search">Search</a>
     </div>
