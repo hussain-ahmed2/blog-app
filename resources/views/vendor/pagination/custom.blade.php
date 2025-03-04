@@ -40,15 +40,15 @@
             </div>
 
             <div class="font-medium">
-                <ul class="flex space-x-5 items-center">
+                <ul class="flex items-center">
                     {{-- Previous Page Link --}}
                     @if ($paginator->onFirstPage())
                         <li class="cursor-default opacity-50" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                            <span class="text-2xl" aria-hidden="true">&lsaquo;</span>
+                            <span class="text-2xl page" aria-hidden="true">&lsaquo;</span>
                         </li>
                     @else
                         <li class="">
-                            <a class="text-2xl" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                            <a class="text-2xl page" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
                         </li>
                     @endif
 
@@ -63,9 +63,9 @@
                         @if (is_array($element))
                             @foreach ($element as $page => $url)
                                 @if ($page == $paginator->currentPage())
-                                    <li class="text-cyan-600" aria-current="page"><span class="">{{ $page }}</span></li>
+                                    <li class="text-cyan-600 page active-page" aria-current="page"><span class="">{{ $page }}</span></li>
                                 @else
-                                    <li class=""><a class="" href="{{ $url }}">{{ $page }}</a></li>
+                                    <li class=""><a class="page" href="{{ $url }}">{{ $page }}</a></li>
                                 @endif
                             @endforeach
                         @endif
@@ -74,10 +74,10 @@
                     {{-- Next Page Link --}}
                     @if ($paginator->hasMorePages())
                         <li class="">
-                            <a class="text-2xl" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                            <a class="text-2xl page" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
                         </li>
                     @else
-                        <li class="cursor-default opacity-50" aria-disabled="true" aria-label="@lang('pagination.next')">
+                        <li class="cursor-default opacity-50 page" aria-disabled="true" aria-label="@lang('pagination.next')">
                             <span class="text-2xl" aria-hidden="true">&rsaquo;</span>
                         </li>
                     @endif
