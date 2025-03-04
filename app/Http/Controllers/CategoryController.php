@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -28,10 +29,17 @@ class CategoryController extends Controller
         //
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $name = $request->get('sort', 'created_at'); // Match form name="sort"
+        $order = $request->get('order', 'desc'); // Match form name="order"
+
         $category = Category::where('id', $id)->firstOrFail();
-        $posts = Post::with(['user', 'comments', 'likes', 'tags'])->where('category_id', $category->id)->paginate(5);
+        $posts = Post::with(['user', 'comments', 'likes', 'tags'])
+            ->where('category_id', $category->id)
+            ->orderByRaw(($name == 'title' ? 'LOWER(title)' : $name) . ' ' . $order) // if name = title then make it lower case and then sort 
+            ->paginate(5)
+            ->appends(['sort' => $name, 'order' => $order]);
         
         return view('category.show', compact('category', 'posts'));
     }
