@@ -12,7 +12,8 @@ class SearchController extends Controller
         $query = $request->input('query');
         $posts = Post::where('title', 'like', '%' . $query . '%')
             ->orWhere('content', 'like', '%' . $query . '%')
-            ->get();
+            ->paginate(5)
+            ->appends(['query' => $query]);
         return view('search.results', compact('query', 'posts'));
     }
 }
