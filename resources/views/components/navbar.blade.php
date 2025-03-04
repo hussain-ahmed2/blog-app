@@ -10,6 +10,7 @@
 
     @auth
         <div class="link-group">
+            <a class="link" href="/posts/create">Create</a>
             <a class="link" href="/dashboard">Dashboard</a>
             <form method="POST" action="/logout">
                 @csrf
