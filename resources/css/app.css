@@ -40,4 +40,12 @@
     .input {
         @apply p-2 border border-slate-300 w-full outline-none focus:ring-[0.1875rem] ring-cyan-500/50 rounded;
     }
+
+    .page {
+        @apply border border-transparent hover:border-slate-400 h-9 aspect-square grid place-content-center rounded;
+    }
+
+    .active-page {
+        @apply !border-cyan-500;
+    }
 }
