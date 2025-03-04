@@ -20,9 +20,12 @@ Route::get('/', function () {
     return view('index', compact('featuredPost', 'recentPosts'));
 })->name('home');
 
+// Post public
+Route::resource('/posts', PostController::class);
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 
+// Categories
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
 
@@ -32,9 +35,11 @@ Route::get('/search', [SearchController::class, 'show'])->name('search');
 
 // Guest Routes
 Route::middleware('guest')->group(function () {
+    // Register
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('/register', [RegisteredUserController::class, 'store']);
 
+    // Login 
     Route::get('/login', [SessionController::class, 'index'])->name('login');
     Route::post('/login', [SessionController::class, 'store']);
 });
@@ -43,8 +48,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout');
 
+    // Post auth
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/posts', [PostController::class, 'store']);
 
+    // Comment and Like auth
     Route::post('/posts/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
     Route::post('/posts/{id}/like', [LikeController::class, 'toggleLike'])->name('like.toggle');
 });
