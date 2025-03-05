@@ -64,4 +64,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+
+    // Define the relationship with followers (A user can have many followers)
+    public function followers(): HasMany
+    {
+        return $this->hasMany(Follower::class, 'following_id');
+    }
+
+    // Define the relationship with followers (A user can follow many followers)
+    public function following(): HasMany
+    {
+        return $this->hasMany(Follower::class, 'user_id');
+    }
 }
