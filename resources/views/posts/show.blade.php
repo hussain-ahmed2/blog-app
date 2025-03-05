@@ -5,7 +5,7 @@
 
     <article class="bg-white p-5 rounded-xl">
         <div>
-            <a href="/authors/{{ $post->user->id }}"
+            <a href="{{ $post->user->id === Auth::id() ? "/dashboard" : "/authors/" . $post->user->id }}"
                 class="text-sm font-semibold mb-2 hover:text-cyan-500 hover:underline">{{ $post->user->name }}</a>
         </div>
         <div>
@@ -79,7 +79,7 @@
             <p class="text-sm text-slate-600">Recent Comments</p>
             @foreach ($post->comments as $comment)
                 <div class="p-4 bg-slate-100 rounded-lg">
-                    <a href="/authors/{{ $comment->user->id }}"
+                    <a href="{{ $comment->user->id === Auth::id() ? "/dashboard" : "/authors/" . $comment->user->id }}"
                         class="font-semibold text-sm hover:underline hover:text-cyan-500">{{ $comment->user->name }}</a>
                     <p class="mt-1 text-gray-600">{{ $comment->content }}</p>
                     <p class="text-right font-thin text-xs">{{ $comment->created_at }}</p>

@@ -1,9 +1,9 @@
 @props(['post'])
 
 
-<article onclick="window.location='/posts/{{ $post->id }}'" class="bg-white p-5 rounded-xl shadow-sm">
+<article onclick="window.location='/posts/{{ $post->id }}'" class="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-transparent hover:border-cyan-400 transition duration-300">
     <div>
-        <a onclick="event.stopPropagation()" href="/authors/{{ $post->user->id }}" class="text-sm font-semibold mb-2 text-cyan-500 hover:underline">
+        <a onclick="event.stopPropagation()" href="{{ $post->user->id === Auth::id() ? "/dashboard" : "/authors/" . $post->user->id }}" class="text-sm font-semibold mb-2 text-cyan-500 hover:underline">
             {{ $post->user->name }}
         </a>
     </div>
