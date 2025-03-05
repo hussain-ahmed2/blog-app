@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Follower;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\Tag;
@@ -29,5 +30,7 @@ class DatabaseSeeder extends Seeder
         // foreach ($posts as $post) {
         //     $post->tags()->attach($tags->random(rand(2, 4))->pluck('id'));
         // }
+
+        // Follower::factory(20)->create();
     }
 }
